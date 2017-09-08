@@ -113,6 +113,14 @@ waypoints = [[1,-1],
              [1,1],
              [1,1],
              [1,1],
+             [1,1],
+             [1,1],
+             [1,1],
+             [1,1],
+             [1,1],
+             [1,1],
+             [1,1],
+             [1,1],
              [1,1]];
 #widx = 0;  # Index of active waypoint
 
@@ -130,8 +138,10 @@ for i in range(len(waypoints)):
     cmdMsg.left = waypoints[i][0]
     cmdMsg.right = waypoints[i][1]
     cmdPub.publish(cmdMsg)
-    time.sleep(2)
-
+    if i>9:
+        time.sleep(1)
+    else:
+	time.sleep(2)
 # Setup subscriber - pointing it to the callback function above
 # Note we use the callback_args to pass the publisher and message into
 # the callback function (Could have used globals, but...)
