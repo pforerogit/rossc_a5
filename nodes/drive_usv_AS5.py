@@ -124,20 +124,23 @@ distThreshold = 3.0;
 cmdPub = rospy.Publisher('/cmd_drive',Drive,queue_size=10);
 time.sleep(2); # Wait to ensure publisher is registered
 
-# Create an empty Twist message for publication
-cmdMsg = Drive()
-
-
+for i in range(len(waypoints)):
+    # Create an empty Twist message for publication
+    cmdMsg = Drive()
+    cmdMsg.left = waypoints[i][0]
+    cmdMsg.right = waypoints[i][1]
+    cmdPub.publish(cmdMsg)
+    time.sleep(3)
 
 # Setup subscriber - pointing it to the callback function above
 # Note we use the callback_args to pass the publisher and message into
 # the callback function (Could have used globals, but...)
-poseSub = rospy.Subscriber('/p3d_odom',Odometry,
-                           callback=callback_fcn,
-                           callback_args=[cmdPub,cmdMsg,
-                                          waypoints])
-print('WIDX = ' + str(widx))
+#poseSub = rospy.Subscriber('/p3d_odom',Odometry,
+#                           callback=callback_fcn,
+#                           callback_args=[cmdPub,cmdMsg,
+#                                          waypoints])
+#print('WIDX = ' + str(widx))
 # This just waits until is_shutdown() becomes true - infinite loop
 # See http://wiki.ros.org/rospy/Overview/Initialization%20and%20Shutdown
-rospy.spin()
+#rospy.spin()
 
