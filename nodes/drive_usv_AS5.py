@@ -130,7 +130,7 @@ for i in range(len(waypoints)):
     cmdMsg.left = waypoints[i][0]
     cmdMsg.right = waypoints[i][1]
     cmdPub.publish(cmdMsg)
-    time.sleep(3)
+    time.sleep(2)
 
 # Setup subscriber - pointing it to the callback function above
 # Note we use the callback_args to pass the publisher and message into
